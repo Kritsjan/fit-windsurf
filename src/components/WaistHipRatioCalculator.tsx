@@ -81,41 +81,36 @@ const WaistHipRatioCalculator = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white rounded-2xl shadow-xl">
+    <div className="bg-white rounded-2xl shadow-xl p-8">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600 mb-4 flex items-center gap-2">
-          <Scale className="w-6 h-6 text-teal-600" />
-          Waist-to-Hip Ratio Calculator
-        </h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-semibold text-teal-800 mb-4 text-center">Waist-to-Hip Ratio Calculator</h2>
+        <p className="text-gray-700 text-center mb-8">
           Use our hip ratio calculator to determine your waist-to-hip ratio (WHR) and assess your body fat distribution. 
-          This waist ratio calculator helps evaluate health risks associated with your body shape.
+          The waist ratio calculator helps evaluate health risks associated with your body shape.
         </p>
       </div>
 
-      <div className="mb-8">
-        <div className="flex justify-center space-x-2 p-1 bg-gray-100 rounded-lg w-fit mx-auto">
-          <button
-            onClick={() => handleUnitSystemChange('metric')}
-            className={`px-4 py-2 rounded-md transition-all duration-200 ${
-              unitSystem === 'metric'
-                ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md'
-                : 'text-gray-600 hover:text-teal-600'
-            }`}
-          >
-            Metric (cm)
-          </button>
-          <button
-            onClick={() => handleUnitSystemChange('imperial')}
-            className={`px-4 py-2 rounded-md transition-all duration-200 ${
-              unitSystem === 'imperial'
-                ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md'
-                : 'text-gray-600 hover:text-teal-600'
-            }`}
-          >
-            Imperial (inches)
-          </button>
-        </div>
+      <div className="flex justify-center gap-4 mb-6">
+        <button
+          onClick={() => handleUnitSystemChange('metric')}
+          className={`px-4 py-2 rounded-md transition-all duration-200 ${
+            unitSystem === 'metric'
+              ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md'
+              : 'text-gray-600 hover:text-teal-600'
+          }`}
+        >
+          Metric (cm)
+        </button>
+        <button
+          onClick={() => handleUnitSystemChange('imperial')}
+          className={`px-4 py-2 rounded-md transition-all duration-200 ${
+            unitSystem === 'imperial'
+              ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md'
+              : 'text-gray-600 hover:text-teal-600'
+          }`}
+        >
+          Imperial (inches)
+        </button>
       </div>
 
       <form onSubmit={calculateWHR} className="grid grid-cols-1 md:grid-cols-2 gap-6">

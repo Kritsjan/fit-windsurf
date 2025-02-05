@@ -43,8 +43,8 @@ const LeanBodyMassCalculator = () => {
     let heightCm = parseFloat(height);
     
     if (unitSystem === 'imperial') {
-      weightKg = weightKg / 2.20462;
-      heightCm = heightCm * 2.54;
+      weightKg = weightKg / 2.20462;  // Convert lbs to kg
+      heightCm = heightCm * 2.54;     // Convert inches to cm
     }
     
     const heightM = heightCm / 100;
@@ -53,7 +53,7 @@ const LeanBodyMassCalculator = () => {
     // Calculate using different formulas
     let boer, james, hume;
     
-    // Boer Formula
+    // Boer Formula (most accurate for normal BMI)
     if (gender === 'male') {
       boer = (0.407 * weightKg) + (0.267 * heightCm) - 19.2;
     } else {
@@ -62,23 +62,40 @@ const LeanBodyMassCalculator = () => {
     
     // James Formula
     if (gender === 'male') {
-      james = 1.1 * weightKg - 128 * (weightKg / heightCm) * (weightKg / heightCm);
+      james = (1.1 * weightKg) - (128 * Math.pow(weightKg / heightCm, 2));
     } else {
-      james = 1.07 * weightKg - 148 * (weightKg / heightCm) * (weightKg / heightCm);
+      james = (1.07 * weightKg) - (148 * Math.pow(weightKg / heightCm, 2));
     }
     
     // Hume Formula
     if (gender === 'male') {
-      hume = (0.3281 * weightKg) + (0.33929 * heightCm) - 29.5336;
+      hume = (0.32810 * weightKg) + (0.33929 * heightCm) - 29.5336;
     } else {
       hume = (0.29569 * weightKg) + (0.41813 * heightCm) - 43.2933;
+    }
+    
+    // Adjust formulas based on body fat percentage if available
+    if (bodyFatPercent > 0) {
+      const actualLeanMass = weightKg * (1 - bodyFatPercent / 100);
+      // Use body fat percentage to adjust the formulas
+      const adjustmentFactor = actualLeanMass / ((boer + james + hume) / 3);
+      boer *= adjustmentFactor;
+      james *= adjustmentFactor;
+      hume *= adjustmentFactor;
     }
     
     // Calculate average LBM
     const averageLBM = (boer + james + hume) / 3;
     
-    // Calculate body fat mass
-    const fatMass = (weightKg * bodyFatPercent) / 100;
+    // Convert results to imperial if needed
+    const conversionFactor = unitSystem === 'imperial' ? 2.20462 : 1;
+    const finalBoer = boer * conversionFactor;
+    const finalJames = james * conversionFactor;
+    const finalHume = hume * conversionFactor;
+    const finalAverage = averageLBM * conversionFactor;
+    
+    // Calculate body fat mass in the current unit system
+    const fatMass = (weightKg * bodyFatPercent / 100) * conversionFactor;
     
     // Calculate lean mass index (LBM/height²)
     const leanMassIndex = averageLBM / (heightM * heightM);
@@ -86,23 +103,23 @@ const LeanBodyMassCalculator = () => {
     // Determine category based on lean mass index
     let category = '';
     if (gender === 'male') {
-      if (leanMassIndex < 16) category = 'Below Normal';
-      else if (leanMassIndex < 19) category = 'Normal';
+      if (leanMassIndex < 18) category = 'Below Normal';
+      else if (leanMassIndex < 20) category = 'Normal';
       else if (leanMassIndex < 22) category = 'Above Normal';
       else category = 'High Muscle Mass';
     } else {
-      if (leanMassIndex < 14) category = 'Below Normal';
+      if (leanMassIndex < 15) category = 'Below Normal';
       else if (leanMassIndex < 17) category = 'Normal';
-      else if (leanMassIndex < 20) category = 'Above Normal';
+      else if (leanMassIndex < 19) category = 'Above Normal';
       else category = 'High Muscle Mass';
     }
     
     setResults({
       leanBodyMass: {
-        boer: parseFloat(boer.toFixed(1)),
-        james: parseFloat(james.toFixed(1)),
-        hume: parseFloat(hume.toFixed(1)),
-        average: parseFloat(averageLBM.toFixed(1))
+        boer: parseFloat(finalBoer.toFixed(1)),
+        james: parseFloat(finalJames.toFixed(1)),
+        hume: parseFloat(finalHume.toFixed(1)),
+        average: parseFloat(finalAverage.toFixed(1))
       },
       bodyFatMass: parseFloat(fatMass.toFixed(1)),
       bodyFatPercentage: bodyFatPercent,
@@ -112,41 +129,35 @@ const LeanBodyMassCalculator = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white rounded-2xl shadow-xl">
+    <div className="bg-white rounded-2xl shadow-xl p-8">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600 mb-4 flex items-center gap-2">
-          <Activity className="w-6 h-6 text-teal-600" />
-          Lean Body Mass Calculator
-        </h2>
-        <p className="text-gray-600">
-          Use our comprehensive lean mass calculator to determine your lean body weight and body composition. 
-          This body fat lean mass calculator helps you track your progress and set realistic fitness goals.
+        <h2 className="text-2xl font-semibold text-teal-800 mb-4 text-center">Lean Body Mass Calculator</h2>
+        <p className="text-gray-700 text-center mb-8">
+          The calculator uses total body weight to derive your estimated lean body mass, which is essential for tracking progress and setting realistic goals to lose weight as well as build muscle. If you need to, <a href="https://myhealthcalculator.fit/body-fat-calculator" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:text-teal-700">calculate your body fat percentage here</a>.
         </p>
       </div>
 
-      <div className="mb-8">
-        <div className="flex justify-center space-x-2 p-1 bg-gray-100 rounded-lg w-fit mx-auto">
-          <button
-            onClick={() => handleUnitSystemChange('metric')}
-            className={`px-4 py-2 rounded-md transition-all duration-200 ${
-              unitSystem === 'metric'
-                ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md'
-                : 'text-gray-600 hover:text-teal-600'
-            }`}
-          >
-            Metric
-          </button>
-          <button
-            onClick={() => handleUnitSystemChange('imperial')}
-            className={`px-4 py-2 rounded-md transition-all duration-200 ${
-              unitSystem === 'imperial'
-                ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md'
-                : 'text-gray-600 hover:text-teal-600'
-            }`}
-          >
-            Imperial
-          </button>
-        </div>
+      <div className="flex justify-center gap-4 mb-6">
+        <button
+          onClick={() => handleUnitSystemChange('metric')}
+          className={`px-4 py-2 rounded-md transition-all duration-200 ${
+            unitSystem === 'metric'
+              ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md'
+              : 'text-gray-600 hover:text-teal-600'
+          }`}
+        >
+          Metric
+        </button>
+        <button
+          onClick={() => handleUnitSystemChange('imperial')}
+          className={`px-4 py-2 rounded-md transition-all duration-200 ${
+            unitSystem === 'imperial'
+              ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md'
+              : 'text-gray-600 hover:text-teal-600'
+          }`}
+        >
+          Imperial
+        </button>
       </div>
 
       <form onSubmit={calculateLeanMass} className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -16,13 +16,16 @@ function WaistHipRatioCalculator() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent mb-4">
-            Waist-to-Hip Ratio Calculator: Measure Your Body Shape Risk
+            Ideal Waist to Hip Ratio Calculator: Measure Your Body Shape and Body Fat Distribution
           </h1>
           
+          <p className="text-lg text-gray-600 mb-4">
+            Determine your body shape and potential health risks with our comprehensive waist hip ratio calculator. 
+            Combining WHR with body mass index (BMI) provides a more comprehensive view of overall health.
+          </p>
           <p className="text-lg text-gray-600">
-            Use our comprehensive hip waist calculator to determine your body shape and potential health risks. 
-            Whether you need to calculate hip to waist ratio or check your measurements against the waist and 
-            hip ratio chart, our WHR calculator provides accurate results.
+            Whether you need to calculate hip to waist ratio or check your measurements against the waist hip ratio chart, 
+            our WHR calculator provides accurate results.
           </p>
         </div>
 
@@ -36,22 +39,25 @@ function WaistHipRatioCalculator() {
           <div className="space-y-8">
             <section>
               <h3 className="text-2xl font-semibold text-teal-800 mb-4">What is Waist-to-Hip Ratio?</h3>
-              <p className="text-gray-700">
-                The waist ratio calculator is a valuable tool for assessing body fat distribution and health risks. Using the hip to waist ratio formula, our calculator helps determine whether you carry more weight around your middle (apple shape) or your hips (pear shape). Understanding how to calculate hip to waist ratio is crucial for evaluating your overall health status.
+              <p className="text-gray-700 mb-4">
+                The waist ratio calculator is a valuable tool for assessing body fat distribution and health risks. Understanding where excess weight is distributed can help identify potential health risks.
               </p>
-              <p className="text-gray-700 mt-4">
-                For a complete body composition assessment, combine our waist and hip ratio calculator with our <Link to="/body-fat-calculator" className="text-teal-600 hover:text-teal-700">body fat calculator</Link> and <Link to="/lean-body-mass-calculator" className="text-teal-600 hover:text-teal-700">lean body mass calculator</Link>.
+              <p className="text-gray-700 mb-4">
+                Identify abdominal obesity, which is linked to increased health risks such as type 2 diabetes and heart disease. Using the hip to waist ratio formula, our calculator helps determine whether you carry more weight around your middle (apple shape) or your hips (pear shape).
+              </p>
+              <p className="text-gray-700">
+                Understanding how to calculate hip to waist ratio is crucial for evaluating your overall health status. For a complete body composition assessment, combine our waist and hip ratio calculator with our <Link to="/body-fat-calculator" className="text-teal-600 hover:text-teal-700">body fat calculator</Link> and <Link to="/lean-body-mass-calculator" className="text-teal-600 hover:text-teal-700">lean body mass calculator</Link>.
               </p>
             </section>
 
             <section>
               <h3 className="text-2xl font-semibold text-teal-800 mb-4">How to Measure Correctly</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 mb-4">
                 To get accurate results from the hip waist calculator, follow these measurement guidelines:
               </p>
-              <ul className="list-disc pl-6 mt-4 text-gray-700">
-                <li>Measure waist at the narrowest point</li>
-                <li>Measure hips at the widest point around buttocks</li>
+              <ul className="list-disc pl-6 text-gray-700">
+                <li>Take your waist measurement at the narrowest point</li>
+                <li>Measure hips at the widest point around buttocks. Obtaining accurate hip measurements is crucial for proper calculation.</li>
                 <li>Keep measuring tape parallel to the floor</li>
                 <li>Stand straight with relaxed breathing</li>
                 <li>Take measurements in the morning</li>
@@ -85,26 +91,29 @@ function WaistHipRatioCalculator() {
 
             <section>
               <h3 className="text-2xl font-semibold text-teal-800 mb-4">Health Implications of WHR</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 mb-4">
                 The weight to hip ratio calculator helps assess various health risks:
               </p>
-              <ul className="list-disc pl-6 mt-4 text-gray-700">
+              <ul className="list-disc pl-6 text-gray-700 mb-4">
                 <li>Cardiovascular disease risk</li>
                 <li>Type 2 diabetes risk</li>
                 <li>Metabolic complications</li>
                 <li>Overall mortality risk</li>
               </ul>
-              <p className="text-gray-700 mt-4">
+              <p className="text-gray-700 mb-4">
+                A higher WHR is linked to an increased risk of heart disease.
+              </p>
+              <p className="text-gray-700">
                 Monitor your progress with our <Link to="/ideal-weight-calculator" className="text-teal-600 hover:text-teal-700">ideal weight calculator</Link> and <Link to="/macro-calculator" className="text-teal-600 hover:text-teal-700">macro calculator</Link> for optimal results.
               </p>
             </section>
 
             <section>
               <h3 className="text-2xl font-semibold text-teal-800 mb-4">Improving Your WHR</h3>
-              <p className="text-gray-700">
-                After using the waist and hip ratio calculator, consider these strategies:
+              <p className="text-gray-700 mb-4">
+                After using the waist and hip ratio calculator, it is crucial to have accurate waist and hip measurements to determine your WHR reliably. Consider these strategies:
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-teal-50 p-4 rounded-lg">
                   <h4 className="font-semibold text-teal-800 mb-2">Diet Strategies:</h4>
                   <ul className="list-disc pl-6 text-gray-700">
@@ -129,26 +138,26 @@ function WaistHipRatioCalculator() {
             <section>
               <h3 className="text-2xl font-semibold text-teal-800 mb-4">Frequently Asked Questions</h3>
               <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-teal-700">How often should I measure my WHR?</h4>
+                <div className="mb-4">
+                  <h4 className="font-semibold text-teal-700 mb-2">How often should I measure my WHR?</h4>
                   <p className="text-gray-700">
                     Use the hip waist calculator monthly to track changes. Significant weight loss or gain warrants more frequent measurements.
                   </p>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-teal-700">Is WHR better than BMI?</h4>
+                <div className="mb-4">
+                  <h4 className="font-semibold text-teal-700 mb-2">Is WHR better than BMI?</h4>
                   <p className="text-gray-700">
                     The waist ratio calculator often provides better insight into health risks than BMI alone. Use both measurements alongside our <Link to="/body-fat-calculator" className="text-teal-600 hover:text-teal-700">body fat calculator</Link> for comprehensive assessment.
                   </p>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-teal-700">What affects waist-to-hip ratio?</h4>
+                <div className="mb-4">
+                  <h4 className="font-semibold text-teal-700 mb-2">What affects waist-to-hip ratio?</h4>
                   <p className="text-gray-700">
                     Diet, exercise, genetics, and age all influence your weight to hip ratio. Regular monitoring with our hip to waist calculator helps track changes.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-teal-700">Can I improve my WHR?</h4>
+                  <h4 className="font-semibold text-teal-700 mb-2">Can I improve my WHR?</h4>
                   <p className="text-gray-700">
                     Yes! Combine proper nutrition (track with our calculators) and targeted exercise to improve your waist and hip ratio measurements over time.
                   </p>
